@@ -1,5 +1,5 @@
 import './App.css';
-import React from 'react'
+import React, {useEffect} from 'react'
 import styled from 'styled-components'
 import Header from './components/Header';
 import ScoreBoard from './components/ScoreBoard';
@@ -7,19 +7,52 @@ import Megatron from './components/Megatron';
 import Panel from './components/Panel';
 
 function App() {
-  const [playerScore, setPlayerScore] = React.useState(1)
-  const [computerScore, setComputerScore] = React.useState(5)
+  const [playerScore, setPlayerScore] = React.useState(0)
+  const [computerScore, setComputerScore] = React.useState(0)
+  const [playerHand, setPlayerHand] = React.useState('Rock')
+  const [computerHand, setComputerHand] = React.useState('Rock')
   const resetScore = () =>{
     setComputerScore(0);
     setPlayerScore(0);
   }
+  const changePlayerHand = (hand) =>{
+    setPlayerHand(hand);
+
+    // random computer hand
+    const randomNum = Math.random();
+    if(randomNum<=0.33333){
+      setComputerHand('Rock');
+    } else if(randomNum>0.33333 && randomNum<=0.66667){
+      setComputerHand('Paper');
+    } else {
+      setComputerHand('Scissors');
+    }
+    // change score
+    
+  }
+
+  useEffect(()=>{
+    if(playerHand==='Rock' && computerHand==='Paper'){
+      setComputerScore(computerScore+1);
+    } else if(playerHand==='Rock' && computerHand==='Scissors'){
+      setPlayerScore(playerScore+1);
+    } else if(playerHand==='Paper' && computerHand==='Rock'){
+      setPlayerScore(playerScore+1);
+    } else if(playerHand==='Paper' && computerHand==='Scissors'){
+      setComputerScore(computerScore+1);
+    } else if(playerHand==='Scissors' && computerHand==='Rock'){
+      setComputerScore(computerScore+1);
+    } else if(playerHand==='Scissors' && computerHand==='Paper'){
+      setPlayerScore(playerScore+1);
+    }
+  },[playerHand])
   return (
     <AppContainer>
       <AppContents>
       <Header/>
       <ScoreBoard playerScore={playerScore} computerScore={computerScore} resetFunction={resetScore}/>
-      <Megatron/>
-      <Panel/>
+      <Megatron playerHand={playerHand} computerHand={computerHand}/>
+      <Panel changePlayerHand={changePlayerHand}/>
       </AppContents>
     </AppContainer>
   );

@@ -1,12 +1,12 @@
 import React from 'react'
 import styled from 'styled-components'
 
-function Panel() {
+function Panel({changePlayerHand}) {
     return (
         <PanelObject>
-            <label>Rock</label>
-            <label>Paper</label>
-            <label>Scissors</label>
+            <label onClick={()=>{changePlayerHand('Rock')}}>Rock</label>
+            <label onClick={()=>{changePlayerHand('Paper')}}>Paper</label>
+            <label onClick={()=>{changePlayerHand('Scissors')}}>Scissors</label>
         </PanelObject>
     )
 }
