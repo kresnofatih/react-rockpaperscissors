@@ -1,4 +1,14 @@
+*{
+  margin: 0;
+}
+
 body {
+  --rps-lyellow: #fbeeac;
+  --rps-dyellow: #f4d160;
+  --rps-lblue: #8ac4d0;
+  --rps-dblue: #28527a;
+  overflow: hidden;
+  
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
