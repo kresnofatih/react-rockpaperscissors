@@ -11,12 +11,16 @@ function App() {
   const [computerScore, setComputerScore] = React.useState(0)
   const [playerHand, setPlayerHand] = React.useState('Rock')
   const [computerHand, setComputerHand] = React.useState('Rock')
+  const [triggerCount, setTriggerCount] = React.useState(0)
   const resetScore = () =>{
+    setPlayerHand('Rock');
+    setComputerHand('Rock');
     setComputerScore(0);
     setPlayerScore(0);
   }
   const changePlayerHand = (hand) =>{
     setPlayerHand(hand);
+    setTriggerCount(triggerCount+1);
 
     // random computer hand
     const randomNum = Math.random();
@@ -45,7 +49,7 @@ function App() {
     } else if(playerHand==='Scissors' && computerHand==='Paper'){
       setPlayerScore(playerScore+1);
     }
-  },[playerHand])
+  },[triggerCount])
   return (
     <AppContainer>
       <AppContents>
